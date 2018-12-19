@@ -26,10 +26,10 @@ class RecoverMoviesService
         for ($page = 1;  $page <= $requestsToBeDone; $page++) {
      		$response = $connector->apiConnect("movie", "upcoming", $page);
 
-			$list = array_merge( $list, MovieFactory::createByJsonList(
-            	json_decode($response->getBody())
-            	->results
-            	));
+			 $list = array_merge( $list, MovieFactory::createByJsonList(
+             	json_decode($response->getBody())
+             	->results
+             	));
 		}
 		
         return array_slice($list, 0, $quantity);
@@ -46,8 +46,7 @@ class RecoverMoviesService
         for ($page = 1;  $page <= $requestsToBeDone; $page++) {
             $response = $connector->apiConnect("search", "movie", $page, $query);
             $list = MovieFactory::createByJsonList(
-            json_decode($response->getBody())
-            ->results
+                json_decode($response->getBody())->results
             );
         }
        

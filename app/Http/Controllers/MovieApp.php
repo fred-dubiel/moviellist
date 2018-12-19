@@ -10,6 +10,7 @@ class MovieApp extends Controller
 
     public function index(Request $request)
     {
+
         try{
         $recoverMoviesService = new RecoverMoviesService();
 
@@ -18,7 +19,7 @@ class MovieApp extends Controller
             [
                 'movies' => $recoverMoviesService->recoverUpcomingList(
                     $request->get("quantity")?:20
-                    ) 
+                    )
             ]
             );    
     } catch(\Exception $e) {

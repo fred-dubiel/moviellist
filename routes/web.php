@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  'MovieApp@index');
 
+ 
  Route::get('MovieApp', 'MovieApp@index');
  Route::post('MovieApp', 'MovieApp@index');
  Route::get('MovieApp/movie', 'MovieApp@detail');

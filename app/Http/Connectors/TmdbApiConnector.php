@@ -27,7 +27,7 @@ class TmdbApiConnector
 
     private function createUri($entity, $type, $page =1, $query = null)
     {
-        $uri = 'https://api.themoviedb.org/3/%s/%s?api_key=%s&language=%s&page=1';
+        $uri = 'https://api.themoviedb.org/3/%s/%s?api_key=%s&language=%s&page=%s';
         $uri .= (!is_null($query)) ? '&query='.$query : '';
 
         return sprintf(
