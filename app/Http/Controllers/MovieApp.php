@@ -33,10 +33,10 @@ class MovieApp extends Controller
         
     	$recoverMoviesService = new RecoverMoviesService();
 
-        if ($request->get('q')) {
+        if ($request->get('q')) {            
          return view(
             'MovieApp.movieList',
-            ['movies' => $recoverMoviesService->findByTitle($request->get('q')) ]
+            ['movies' => $recoverMoviesService->findByTitle($request->get('q'), $request->get("quantity")?:20) ]
             );   
         } 
 

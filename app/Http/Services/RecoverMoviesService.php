@@ -19,38 +19,23 @@ class RecoverMoviesService
 
         $connector = new TmdbApiConnector();
 
-        $list = [];
-
         $requestsToBeDone =  ceil($quantity/self::MOVIES_PER_PAGE);
 
-        for ($page = 1;  $page <= $requestsToBeDone; $page++) {
-     		$response = $connector->apiConnect("movie", "upcoming", $page);
+        $list = $this->handleRequests($requestsToBeDone,"movie", "upcoming");
 
-			 $list = array_merge( $list, MovieFactory::createByJsonList(
-             	json_decode($response->getBody())
-             	->results
-             	));
-		}
-		
         return array_slice($list, 0, $quantity);
     }
 
-    public function findByTitle($query, $page = 20)
+    public function findByTitle($query, $quantity = 20)
     {
 
         $connector = new TmdbApiConnector();
-
-        $list = [];
+       
         $requestsToBeDone =  ceil($quantity/self::MOVIES_PER_PAGE);
 
-        for ($page = 1;  $page <= $requestsToBeDone; $page++) {
-            $response = $connector->apiConnect("search", "movie", $page, $query);
-            $list = MovieFactory::createByJsonList(
-                json_decode($response->getBody())->results
-            );
-        }
-       
-        return $list;
+        $list = $this->handleRequests($requestsToBeDone,"search", "movie", $query);
+
+       return array_slice($list, 0, $quantity);
     }
 
     public function findById($id)
@@ -62,4 +47,20 @@ class RecoverMoviesService
             json_decode($response->getBody())
             );
     }
+
+    private function handleRequests($requestsToBeDone, $entity, $type, $query = null)
+    {
+         $list = [];
+
+         $connector = new TmdbApiConnector();
+         for ($page = 1;  $page <= $requestsToBeDone; $page++) {
+            $response = $connector->apiConnect($entity, $type, $page, $query);
+            $list = MovieFactory::createByJsonList(
+                json_decode($response->getBody())->results
+            );
+        }
+
+        return $list;
+    }
+
 }

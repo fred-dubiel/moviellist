@@ -9,6 +9,13 @@ class TmdbApiConnector
 
     const API_KEY = '1f54bd990f1cdfb230adb312546d765d';
 
+    /**
+    *
+    * @param $entity
+    * @param $type
+    * @param $page
+    * @param $query
+    */
     public function apiConnect($entity, $type, $page=1, $query =null)
     {
 

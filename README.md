@@ -4,15 +4,37 @@ Test to archtouch, using Tmdb as source of data
 
 ## Installation
 
-use a apache2 and php enviroment
+Use a apache2 and php enviroment
 
-clone the project
+Clone the project
 
-run the composer install
+Run the composer install
+
+The ./storage folder must have a 777 permission
+
+Set up the sites-avaiable/sites-enabled acoordenly 
+Ex:
+<VirtualHost *:80>
+    ServerName archtouch.local
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/archtouch/public
+
+    <Directory /var/www/html/archtouch>
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Add a line to the file /etc/hosts/ 
+Ex: 127.0.0.1       archtouch.local
+
 
 ## Usage
 
-http://[host]/
+http://archtouch.local/
 
 Shows the main screen
 

@@ -84,9 +84,13 @@
 @include('MovieApp.searchForm')
 </div>
 <div class="movie_list">
+@if ($movies)
 @foreach ($movies as $movie)
     @include('MovieApp.movie', ['movie' => $movie])
 @endforeach
+@else
+No movies to show
+@endif
 <div>
 
 
